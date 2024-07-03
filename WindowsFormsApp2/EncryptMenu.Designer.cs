@@ -197,7 +197,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.Window;
-            ClientSize = new System.Drawing.Size(933, 519);
+            ClientSize = new System.Drawing.Size(949, 564);
             Controls.Add(progressBar2);
             Controls.Add(ClearOutput);
             Controls.Add(ClearInput);

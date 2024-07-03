@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using EnigmaLib;
 
+using static EnigmaLib.Languages;
+
 namespace WindowsFormsApp2
 {
     public partial class EncryptMenu : Form
@@ -23,29 +25,26 @@ namespace WindowsFormsApp2
         public EncryptMenu()
         {
             InitializeComponent();
-            var langs = new Languages();
-            comboBox1.DataSource = langs.EnRLine.ToList();
-            comboBox2.DataSource = langs.EnRLine.ToList();
-            comboBox3.DataSource = langs.EnRLine.ToList();
+            comboBox1.DataSource = EnRDict.Keys.ToList();
+            comboBox2.DataSource = EnRDict.Keys.ToList();
+            comboBox3.DataSource = EnRDict.Keys.ToList();
             LangEn.Checked = true;
         }
 
         private void InterfaceLangSwitcher(string lang)
         {
-            var langs = new Languages();
-
             switch (lang)
             {
                 case "ru":
-                    comboBox1.DataSource = langs.RuRLine.ToList();
-                    comboBox2.DataSource = langs.RuRLine.ToList();
-                    comboBox3.DataSource = langs.RuRLine.ToList();
+                    comboBox1.DataSource = RuRDict.Keys.ToList();
+                    comboBox2.DataSource = RuRDict.Keys.ToList();
+                    comboBox3.DataSource = RuRDict.Keys.ToList();
                     break;
 
                 case "en":
-                    comboBox1.DataSource = langs.EnRLine.ToList();
-                    comboBox2.DataSource = langs.EnRLine.ToList();
-                    comboBox3.DataSource = langs.EnRLine.ToList();
+                    comboBox1.DataSource = EnRDict.Keys.ToList();
+                    comboBox2.DataSource = EnRDict.Keys.ToList();
+                    comboBox3.DataSource = EnRDict.Keys.ToList();
                     break;
 
                 default:
@@ -103,7 +102,7 @@ namespace WindowsFormsApp2
 
                 foreach (char i in encryptMessage)
                 {
-                    result[counter] = enigma.Ecnrypt(i);
+                    result[counter] = enigma.Encrypt(i);
                     counter++;
                 }
 
@@ -111,7 +110,7 @@ namespace WindowsFormsApp2
                 {
                     textBox1.Text += i;
                     textBox1.Update();
-                    Thread.Sleep(200);
+                    Thread.Sleep(100);
                     progressBar2.PerformStep();
                 }
 
@@ -167,5 +166,6 @@ namespace WindowsFormsApp2
         {
 
         }
+
     }
 }
