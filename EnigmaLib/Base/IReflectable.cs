@@ -23,5 +23,7 @@ namespace EnigmaLib
         /// </summary>
         /// <param name="reflectionDict">Словарь рефлектора</param>
         public void SetReflectionConfig(Dictionary<char, char> reflectionDict);
+
+        public char[] GetRotorLine();
     }
 }

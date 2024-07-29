@@ -11,12 +11,13 @@ using System.Windows.Forms;
 using EnigmaLib;
 
 using static EnigmaLib.Languages;
+using static EnigmaLib.Constants;
 
 namespace WindowsFormsApp2
 {
     public partial class EncryptMenu : Form
     {
-        private Enigma enigma = new Enigma();
+        private Enigma enigma = new Enigma(new SEEngine());
         private string KeyPart1 = "a";
         private string KeyPart2 = "a";
         private string KeyPart3 = "a";
@@ -35,13 +36,13 @@ namespace WindowsFormsApp2
         {
             switch (lang)
             {
-                case "ru":
+                case Russian:
                     comboBox1.DataSource = RuRDict.Keys.ToList();
                     comboBox2.DataSource = RuRDict.Keys.ToList();
                     comboBox3.DataSource = RuRDict.Keys.ToList();
                     break;
 
-                case "en":
+                case English:
                     comboBox1.DataSource = EnRDict.Keys.ToList();
                     comboBox2.DataSource = EnRDict.Keys.ToList();
                     comboBox3.DataSource = EnRDict.Keys.ToList();
@@ -74,14 +75,14 @@ namespace WindowsFormsApp2
 
         private void LangRu_CheckedChanged(object sender, EventArgs e)
         {
-            enigma.SwithLang("ru");
-            InterfaceLangSwitcher("ru");
+            enigma.Lang = Russian;
+            InterfaceLangSwitcher(Russian);
         }
 
         private void LangEn_CheckedChanged(object sender, EventArgs e)
         {
-            enigma.SwithLang("en");
-            InterfaceLangSwitcher("en");
+            enigma.Lang = English;
+            InterfaceLangSwitcher(English);
         }
 
         private void EncryptingButton_Click(object sender, EventArgs e)
@@ -131,7 +132,7 @@ namespace WindowsFormsApp2
 
         private void SetKey_Click(object sender, EventArgs e)
         {
-            enigma.SetKey(KeyPart1 + KeyPart2 + KeyPart3);
+            enigma.Key = KeyPart1 + KeyPart2 + KeyPart3;
             MessageBox.Show($"Успешно установлен ключ: {KeyPart1} {KeyPart2} {KeyPart3}");
         }
 

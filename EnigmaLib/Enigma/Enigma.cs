@@ -4,68 +4,43 @@ namespace EnigmaLib
 {
     public class Enigma
     {
-        private Engine engine = new();
+        private IEngine engine;
 
-        private string key = Default;
-
-
-        public Enigma()
+        private string key;
+        public string Key 
         {
-            SetKey(key);
+            get { return key; } 
+            set 
+            {
+                key = value;
+                engine.Key = value.ToArray();
+                engine.Init();
+            } 
         }
 
-
-        public void SetKey(string key)
+        private string lang;
+        public string Lang
         {
-            this.key = key;
-            Reboot();
+            get { return lang; }
+            set
+            {
+                lang = value;
+                engine.SetLang(value);
+            }
         }
 
+        public Enigma(IEngine engine) => this.engine = engine;
 
         public char Encrypt(char letter)
         {
             return engine.GetNewLetter(letter, false);
         }
 
-
         public string Encrypt(string message)
         {
             string result = Empty;
-
-            foreach (char i in message)
-            {
-                var res = engine.GetNewLetter(i, false);
-                Console.WriteLine($"ENCRYPTED: {res}\n");
-                result += res;
-            }
-                
-
+            message.ToList().ForEach(letter => result += engine.GetNewLetter(letter, false));
             return result;
         }
-
-
-        public void Reboot()
-        {
-            char[] NewKey = key.ToCharArray();
-            engine.Init(NewKey);
-        }
-
-
-        public void SwithLang(string Lang)
-        {
-            engine.SetLang(Lang);
-        }
-
-
-        public string GetLang()
-        {
-            return engine.Lang;
-        }
-
-        public char[] GetCurrentRotorLine(string name)
-        {
-            return engine.GetRotorLineByName(name);
-        }
-
     }
 }

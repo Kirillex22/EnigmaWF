@@ -67,10 +67,8 @@ namespace EnigmaLib
         /// Устанавливает часть ключа как ключ для текущего ротора.
         /// </summary>
         /// <param name="Key">Символ, соответствующий части ключа</param>
-        public void SetRotorKey(char Key)
+        public void SetKey(char Key)
         {
-            RoundCounter = StartPoint;
-
             this.Key = Key;
             int leftDisplacement = Array.IndexOf(leftRotorLine, Key);
 
@@ -112,8 +110,6 @@ namespace EnigmaLib
             }
 
             UpdateRight();
-
-            //Print(isInitial);
         }
 
         /// <summary>
@@ -158,6 +154,7 @@ namespace EnigmaLib
         {
             leftRotorLine = commutationDict.Keys.ToArray();
             rightRotorLine = commutationDict.Values.ToArray();
+            RoundCounter = StartPoint;
         }
     }
 }
