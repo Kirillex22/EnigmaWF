@@ -2,7 +2,7 @@
 
 namespace EnigmaLib
 {
-    class Reflector : IReflectable
+    public class Reflector : IReflectable
     {
         public string Name = Empty;
 

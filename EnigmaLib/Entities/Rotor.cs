@@ -12,7 +12,7 @@ using static EnigmaLib.Languages;
 
 namespace EnigmaLib
 {
-    class Rotor : ICommutatable, ITurnable, IPrintable
+    public class Rotor : ICommutatable, ITurnable, IPrintable
     {
         /// <summary>
         /// Используется в качестве метки ротора.

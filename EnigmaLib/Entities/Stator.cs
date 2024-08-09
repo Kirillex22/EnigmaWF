@@ -11,7 +11,7 @@ using static EnigmaLib.Languages;
 
 namespace EnigmaLib
 {
-    class Stator : ICommutatable
+    public class Stator : ICommutatable
     {
         public string Name = Empty;
 
@@ -31,7 +31,6 @@ namespace EnigmaLib
 
 
         public char[] GetRotorLine(bool isLeft = true) => isLeft ? leftRotorLine : rightRotorLine;
-
 
         public void SetCommutationConfig(Dictionary<char, char> commutationDict, Dictionary<char, char> reversedCommutationDict)
         {

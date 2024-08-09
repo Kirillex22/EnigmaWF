@@ -1,12 +1,16 @@
-﻿using static EnigmaLib.Constants;
+﻿using EnigmaLib.Base;
+using static EnigmaLib.Constants;
 
 namespace EnigmaLib
 {
-    public class Enigma
+    public class BaseEnigma
     {
         private IEngine engine;
 
+        public IChangeable Commutator { get; set; } 
+
         private string key;
+
         public string Key 
         {
             get { return key; } 
@@ -29,18 +33,30 @@ namespace EnigmaLib
             }
         }
 
-        public Enigma(IEngine engine) => this.engine = engine;
-
-        public char Encrypt(char letter)
+        public BaseEnigma(IEngineBuilder builder)
         {
-            return engine.GetNewLetter(letter, false);
+            builder.BuildStator();
+            builder.BuildRotor();
+            builder.BuildRotor();
+            builder.BuildRotor();
+            builder.BuildReflector();
+            engine = builder.GetEngine();
         }
+
+        public char Encrypt(char letter) => engine.GetNewLetter(letter, false);
 
         public string Encrypt(string message)
         {
             string result = Empty;
-            message.ToList().ForEach(letter => result += engine.GetNewLetter(letter, false));
+            message.ToList().ForEach(letter => {
+                var currentLetter = Commutator.Commutate(letter);
+                result += Commutator.Commutate(engine.GetNewLetter(currentLetter, false));
+            });
             return result;
         }
+
+        public void ConnectWires(char letterA, char letterB) => Commutator.CreatePair(letterA, letterB);
+
+        public void DisconnectWires(char letterA, char letterB) => Commutator.DeletePair(letterA, letterB);
     }
 }

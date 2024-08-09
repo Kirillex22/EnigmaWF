@@ -1,60 +1,32 @@
-﻿using System;
+﻿using EnigmaLib.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EnigmaLib.Base;
 using static EnigmaLib.Constants;
 using static EnigmaLib.Languages;
 
 namespace EnigmaLib
 {
-    public class SEEngine : IEngine //simple enigma engine
+    public class BaseEngine : IEngine
     {
-        public char[] Key { get; set; }
-
-        private Stator stator;
-
-        private Reflector reflector;
-
-        private List<Rotor> rotors;
-
+        public char[]? Key { get; set; }
         public string Lang { get; set; } = English;
 
-        public SEEngine()
-        {
-            stator = new Stator();
-            reflector = new Reflector();
+        private Stator? stator;
 
-            rotors = new List<Rotor>() {
-                new Rotor(),
-                new Rotor(),
-                new Rotor()
-            };
+        private Reflector? reflector; //как избавиться от жесткой привязки к типам??
 
-            stator.Name = "Stator";
-            rotors[0].Name = "Right";
-            rotors[1].Name = "Middle";
-            rotors[2].Name = "Left";
-            reflector.Name = "Reflector";
+        private List<Rotor> rotors;
+        
+        public BaseEngine() => rotors = new List<Rotor>();
+        
+        public void PlaceRotor(Rotor rotor) => rotors.Add(rotor);
 
-            SetLang(Lang);
-        }
+        public void PlaceStator(Stator stator) => this.stator = stator;
 
-        /// <summary>
-        /// Позволяет получить левую сторону ротора по его имени
-        /// </summary>
-        /// <param name="name">Имя ротора</param>
-        /// <returns></returns>
-        public char[]? GetRotorLineByName(string name)
-        {
-            foreach(var i in rotors)
-            {
-                if (i.Name == name) return i.GetRotorLine(true);
-            }
-
-            return null;
-        }
+        public void PlaceReflector(Reflector reflector) => this.reflector = reflector;
 
         /// <summary>
         /// Производит коммутацию между парой ICommutatable слева-направо
@@ -105,7 +77,7 @@ namespace EnigmaLib
             char nextRotorInputLetter = reflector.Reflect(reflectorLine[Array.IndexOf(outputLine, letter)]);
 
             return outputInputRotor.BackwardCommutate(outputLine[Array.IndexOf(reflectorLine, nextRotorInputLetter)]);
-            
+
         }
 
         /// <summary>
@@ -121,7 +93,7 @@ namespace EnigmaLib
                 rotors[i].SetInitialState();
                 rotors[i].SetKey(Key[k - i]);
             }
-                
+
         }
 
         /// <summary>
@@ -140,7 +112,6 @@ namespace EnigmaLib
                 else
                     break;
             }
-
         }
 
         /// <summary>
@@ -180,10 +151,9 @@ namespace EnigmaLib
         /// <returns>Преобразованный символ</returns>
         public char GetNewLetter(char currentLetter, bool logging)
         {
-
             SystemTurn();
 
-            if(logging)
+            if (logging)
             {
                 foreach (var i in rotors) i.Print(false);
             }
@@ -193,7 +163,7 @@ namespace EnigmaLib
             currentLetter = RightLeftReflection(currentLetter, rotors[rotors.Count() - 1], reflector);//отражение на рефлекторе          
             currentLetter = BckwrdProp(currentLetter);//обратный обход         
             currentLetter = RightCommutation(currentLetter, rotors[0], stator);//передача сигнала на статор
-       
+
             return currentLetter;//возврат значения
         }
 
@@ -205,12 +175,10 @@ namespace EnigmaLib
         private Dictionary<char, char> ReverseDict(Dictionary<char, char> initial)
         {
             var reversed = new Dictionary<char, char>();
-
-            foreach(var pair in initial)
+            foreach (var pair in initial)
             {
                 reversed.Add(pair.Value, pair.Key);
             }
-
             return reversed;
         }
 
@@ -231,7 +199,7 @@ namespace EnigmaLib
                         i.SetCommutationConfig(RuRDict, ReverseDict(RuRDict));
                         i.Key = RuSTDKey;
                     }
-                                            
+
                     this.Lang = Russian;
                     break;
 
@@ -252,6 +220,5 @@ namespace EnigmaLib
                     break;
             }
         }
-
     }
 }

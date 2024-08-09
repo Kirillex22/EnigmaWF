@@ -12,12 +12,13 @@ using EnigmaLib;
 
 using static EnigmaLib.Languages;
 using static EnigmaLib.Constants;
+using EnigmaLib.Builders;
 
 namespace WindowsFormsApp2
 {
     public partial class EncryptMenu : Form
     {
-        private Enigma enigma = new Enigma(new SEEngine());
+        private BaseEnigma enigma;
         private string KeyPart1 = "a";
         private string KeyPart2 = "a";
         private string KeyPart3 = "a";
@@ -25,6 +26,9 @@ namespace WindowsFormsApp2
 
         public EncryptMenu()
         {
+            var builder = new BaseEngineBuilder();
+            enigma = new BaseEnigma(builder);
+            enigma.Commutator = new Commutator();
             InitializeComponent();
             comboBox1.DataSource = EnRDict.Keys.ToList();
             comboBox2.DataSource = EnRDict.Keys.ToList();
@@ -167,6 +171,5 @@ namespace WindowsFormsApp2
         {
 
         }
-
     }
 }
