@@ -14,20 +14,23 @@ namespace EnigmaLib.Builders
 
         public BaseEngineBuilder() => _engine = new BaseEngine();
 
-        public void BuildStator()
+        public IEngineBuilder BuildStator()
         {
             var st = new Stator();
             _engine.PlaceStator(st);
+            return this;
         }
-        public void BuildRotor()
+        public IEngineBuilder BuildRotor()
         {
             var rt = new Rotor();
             _engine.PlaceRotor(rt);
+            return this;
         }
-        public void BuildReflector()
+        public IEngineBuilder BuildReflector()
         {
             var rf = new Reflector();
             _engine.PlaceReflector(rf);
+            return this;
         }
 
         public IEngine GetEngine() => _engine;

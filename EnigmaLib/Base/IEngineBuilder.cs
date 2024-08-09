@@ -8,9 +8,9 @@ namespace EnigmaLib.Base
 {
     public interface IEngineBuilder
     {
-        public void BuildStator();
-        public void BuildRotor();
-        public void BuildReflector();
+        public IEngineBuilder BuildStator();
+        public IEngineBuilder BuildRotor();
+        public IEngineBuilder BuildReflector();
         public IEngine GetEngine();
     }
 }

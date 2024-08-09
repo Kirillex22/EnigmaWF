@@ -115,16 +115,16 @@ namespace WindowsFormsApp2
                 {
                     textBox1.Text += i;
                     textBox1.Update();
-                    Thread.Sleep(100);
+                    //Thread.Sleep(100);
                     progressBar2.PerformStep();
                 }
 
                 Array.Clear(result);
             }
 
-            catch
+            catch(Exception exc)
             {
-                MessageBox.Show("Проверьте правильность раскладки введенного текста, а также его соответствие алфавиту.");
+                MessageBox.Show($"Проверьте правильность раскладки введенного текста, а также его соответствие алфавиту. /{exc.Message}/");
             }
 
         }

@@ -35,12 +35,13 @@ namespace EnigmaLib
 
         public BaseEnigma(IEngineBuilder builder)
         {
-            builder.BuildStator();
-            builder.BuildRotor();
-            builder.BuildRotor();
-            builder.BuildRotor();
-            builder.BuildReflector();
-            engine = builder.GetEngine();
+            engine = builder
+                .BuildStator()
+                .BuildRotor()
+                .BuildRotor()
+                .BuildRotor()
+                .BuildReflector()
+                .GetEngine();
         }
 
         public char Encrypt(char letter) => engine.GetNewLetter(letter, false);
