@@ -9,7 +9,7 @@ namespace EnigmaLib
     /// <summary>
     /// Контракт, обязывающий обладать свойствами внутренней коммутации (т.е. быть функцией char -> char в пределах методов ForwardCommutate и BackwardCommutate).
     /// </summary>
-    internal interface ICommutatable
+    public interface ICommutatable
     {
         /// <summary>
         /// Позволяет получить текущее внутреннее состояние ICommutatable в виде массива char[].

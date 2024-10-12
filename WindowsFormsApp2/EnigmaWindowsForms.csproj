@@ -4,7 +4,12 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <ApplicationIcon>Enigma-logo.ico</ApplicationIcon>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Enigma-logo.ico" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EnigmaLib\EnigmaLib.csproj" />
   </ItemGroup>

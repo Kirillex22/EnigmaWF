@@ -33,6 +33,11 @@ namespace EnigmaLib.Builders
             return this;
         }
 
+        public IEngineBuilder BuildOffset(int offset)
+        {
+            _engine.PlaceOffsetByFullRound(offset);
+            return this;
+        }
         public IEngine GetEngine() => _engine;
     }
 }

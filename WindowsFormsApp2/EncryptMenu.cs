@@ -18,7 +18,7 @@ namespace WindowsFormsApp2
 {
     public partial class EncryptMenu : Form
     {
-        private BaseEnigma enigma;
+        private IEnigma enigma;
         private string KeyPart1 = "a";
         private string KeyPart2 = "a";
         private string KeyPart3 = "a";
@@ -26,9 +26,11 @@ namespace WindowsFormsApp2
 
         public EncryptMenu()
         {
-            var builder = new BaseEngineBuilder();
-            enigma = new BaseEnigma(builder);
-            enigma.Commutator = new Commutator();
+            enigma = new BaseEnigmaBuilder()
+                .BuildEngine()
+                .BuildCommutationPanel()
+                .GetEnigma();
+
             InitializeComponent();
             comboBox1.DataSource = EnRDict.Keys.ToList();
             comboBox2.DataSource = EnRDict.Keys.ToList();

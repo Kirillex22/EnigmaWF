@@ -7,6 +7,7 @@ using EnigmaLib;
 
 namespace WindowsFormsApp2
 {
+
     internal static class Program
     {
         /// <summary>

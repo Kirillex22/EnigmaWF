@@ -1,0 +1,11 @@
+{
+  "EngineConfig": {
+    "rotorsCount": 4,
+    "offsetByFullRound": 1
+  },
+
+  "CommutationPanelConfig": {
+    "a": "b",
+    "b": "a"
+  }
+}

@@ -9,7 +9,7 @@ namespace EnigmaLib.Base
     /// <summary>
     /// Контракт, обязывающий обладать возможностью поворота.
     /// </summary>
-    internal interface ITurnable
+    public interface ITurnable
     {
         /// <summary>
         /// Изменяет состояние ITurnable

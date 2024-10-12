@@ -11,6 +11,7 @@ namespace EnigmaLib.Base
         public IEngineBuilder BuildStator();
         public IEngineBuilder BuildRotor();
         public IEngineBuilder BuildReflector();
+        public IEngineBuilder BuildOffset(int offset);
         public IEngine GetEngine();
     }
 }

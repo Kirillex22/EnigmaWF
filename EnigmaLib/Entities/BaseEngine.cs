@@ -19,6 +19,8 @@ namespace EnigmaLib
         private Reflector? reflector; //как избавиться от жесткой привязки к типам??
 
         private List<Rotor> rotors;
+
+        private int _offsetByFullRound;
         
         public BaseEngine() => rotors = new List<Rotor>();
         
@@ -27,6 +29,8 @@ namespace EnigmaLib
         public void PlaceStator(Stator stator) => this.stator = stator;
 
         public void PlaceReflector(Reflector reflector) => this.reflector = reflector;
+
+        public void PlaceOffsetByFullRound(int offsetByFullRound) => _offsetByFullRound = offsetByFullRound;
 
         /// <summary>
         /// Производит коммутацию между парой ICommutatable слева-направо
@@ -108,7 +112,9 @@ namespace EnigmaLib
             for (int i = 0; i <= k; i++)
             {
                 if (rotors[i].RoundCounter == StartPoint)
-                    rotors[(i + 1) % k].Turn(false);
+
+                    for(int j = 0; j < _offsetByFullRound; j++)
+                        rotors[(i + 1) % k].Turn(false);
                 else
                     break;
             }

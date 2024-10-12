@@ -9,34 +9,32 @@ namespace EnigmaLib
 {
     public class Commutator : IChangeable
     {
-        private Dictionary<char, char> container;
+        private Dictionary<char, char> _container;
 
-        public Commutator()
+        public Commutator(Dictionary<char, char> container)
         {
-            container = new Dictionary<char, char>();
+            container = container;
         }
         public void CreatePair(char letterA, char letterB)
         {
-            container.Add(letterA, letterB);
-            container.Add(letterB, letterA);
+            _container.Add(letterA, letterB);
+            _container.Add(letterB, letterA);
         }
 
         public void DeletePair(char letterA, char letterB)
         {
-            if (container[letterA] == letterB || container[letterB] == letterA)
+            if (_container[letterA] == letterB)
             {
-                container.Remove(letterA);
-                container.Remove(letterB);
+                _container.Remove(letterA);
+                _container.Remove(letterB);
             }
-            else
-                throw new Exception("Wrong situation");
         }
 
         public char Commutate(char letter)
         {
-            if (container.ContainsKey(letter))
+            if (_container.ContainsKey(letter))
             {
-                return container[letter];
+                return _container[letter];
             }
 
             return letter;

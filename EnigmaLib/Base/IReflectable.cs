@@ -9,7 +9,7 @@ namespace EnigmaLib
     /// <summary>
     /// Контракт, обязывающий обладать свойством преобразования символа в парный для него.
     /// </summary>
-    interface IReflectable
+    public interface IReflectable
     {
         /// <summary>
         /// Производит преобразования символа на рефлекторе.
